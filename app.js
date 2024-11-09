@@ -16,6 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 connectDB();
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the API!');
+  });
+  
+
 // Routes
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/admin', adminRoutes);
