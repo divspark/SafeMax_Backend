@@ -1,6 +1,7 @@
 const Admin = require('../models/AdminSchema');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
 require('dotenv').config();
 
 const registerAdmin = async (req, res) => {
