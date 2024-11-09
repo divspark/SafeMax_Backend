@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://safe-max-backend.vercel.app/', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed HTTP methods
+  credentials: true // Optional: if your frontend needs cookies or authorization headers
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
