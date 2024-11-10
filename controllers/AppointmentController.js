@@ -15,7 +15,11 @@ const createAppointment = async (req, res) => {
 
         await newAppointment.save();
 
-        res.status(201).json({ message: 'Appointment created successfully', appointment: { ...newAppointment.toObject(), id: newAppointment._id } });
+        // Return _id along with appointment details
+        res.status(201).json({ 
+            message: 'Appointment created successfully', 
+            appointment: { ...newAppointment.toObject(), _id: newAppointment._id } 
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error creating appointment', error: error.message });
     }
@@ -25,7 +29,8 @@ const createAppointment = async (req, res) => {
 const getAllAppointments = async (req, res) => {
     try {
         const appointments = await Appointment.find();
-        res.status(200).json(appointments.map(appt => ({ ...appt.toObject(), id: appt._id })));
+        // Return appointments with _id field
+        res.status(200).json(appointments.map(appt => ({ ...appt.toObject(), _id: appt._id })));
     } catch (error) {
         res.status(500).json({ message: 'Error fetching appointments', error: error.message });
     }
@@ -47,7 +52,11 @@ const updateAppointment = async (req, res) => {
 
         await appointment.save();
 
-        res.status(200).json({ message: 'Appointment updated successfully', appointment: { ...appointment.toObject(), id: appointment._id } });
+        // Return updated appointment with _id
+        res.status(200).json({ 
+            message: 'Appointment updated successfully', 
+            appointment: { ...appointment.toObject(), _id: appointment._id } 
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating appointment', error: error.message });
     }
@@ -68,7 +77,11 @@ const assignToDepartment = async (req, res) => {
         appointment.concerningDepartment = department;
         await appointment.save();
 
-        res.status(200).json({ message: 'Appointment assigned to department successfully', appointment: { ...appointment.toObject(), id: appointment._id } });
+        // Return the updated appointment with _id
+        res.status(200).json({ 
+            message: 'Appointment assigned to department successfully', 
+            appointment: { ...appointment.toObject(), _id: appointment._id } 
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error assigning appointment to department', error: error.message });
     }
