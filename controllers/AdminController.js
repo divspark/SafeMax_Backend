@@ -50,14 +50,9 @@ const loginAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        // Log both the entered password and the stored password hash
-        console.log('Entered password:', password);
-        console.log('Stored hashed password:', admin.password);
 
         // Compare the entered password with the stored hash
         const isPasswordMatch = await bcrypt.compare(password.trim(), admin.password.trim());
-
-        console.log('Password match result:', isPasswordMatch);
 
         if (!isPasswordMatch) {
             return res.status(400).json({ message: 'Invalid email or password' });
