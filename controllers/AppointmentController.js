@@ -15,18 +15,17 @@ const createAppointment = async (req, res) => {
 
         await newAppointment.save();
 
-        res.status(201).json({ message: 'Appointment created successfully', appointment: newAppointment });
+        res.status(201).json({ message: 'Appointment created successfully', appointment: { ...newAppointment.toObject(), id: newAppointment._id } });
     } catch (error) {
         res.status(500).json({ message: 'Error creating appointment', error: error.message });
     }
 };
 
-
 // Get all appointments (Admin-only)
 const getAllAppointments = async (req, res) => {
     try {
         const appointments = await Appointment.find();
-        res.status(200).json(appointments);
+        res.status(200).json(appointments.map(appt => ({ ...appt.toObject(), id: appt._id })));
     } catch (error) {
         res.status(500).json({ message: 'Error fetching appointments', error: error.message });
     }
@@ -48,12 +47,11 @@ const updateAppointment = async (req, res) => {
 
         await appointment.save();
 
-        res.status(200).json({ message: 'Appointment updated successfully', appointment });
+        res.status(200).json({ message: 'Appointment updated successfully', appointment: { ...appointment.toObject(), id: appointment._id } });
     } catch (error) {
         res.status(500).json({ message: 'Error updating appointment', error: error.message });
     }
 };
-
 
 // Assign an appointment to a concerning department (Admin-only)
 const assignToDepartment = async (req, res) => {
@@ -70,12 +68,11 @@ const assignToDepartment = async (req, res) => {
         appointment.concerningDepartment = department;
         await appointment.save();
 
-        res.status(200).json({ message: 'Appointment assigned to department successfully', appointment });
+        res.status(200).json({ message: 'Appointment assigned to department successfully', appointment: { ...appointment.toObject(), id: appointment._id } });
     } catch (error) {
         res.status(500).json({ message: 'Error assigning appointment to department', error: error.message });
     }
 };
-
 
 module.exports = {
     createAppointment,
