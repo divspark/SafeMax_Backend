@@ -87,11 +87,13 @@ Create a `.env` file in the root directory with the following environment variab
 MONGO_URI=your_mongo_connection_string
 PORT=5000
 JWT_SECRET=your_secret_key_here
+FRONTEND_URL=your_frontend_url
 ```
 
 - `MONGO_URI`: MongoDB connection string (local or MongoDB Atlas).
 - `PORT`: Port number for the server (default: 5000).
 - `JWT_SECRET`: Secret key for JWT authentication.
+- `FRONTEND_URL`: Frontend Url Of Application.
 
 ### Running the Server
 
