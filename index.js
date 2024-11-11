@@ -13,7 +13,7 @@ const frontendURL = process.env.FRONTEND_URL;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'frontendURL', // Replace with your frontend URL
+  origin: frontendURL, 
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'], // Allowed HTTP methods
   credentials: true // Optional: if your frontend needs cookies or authorization headers
 }));
